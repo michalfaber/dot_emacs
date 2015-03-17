@@ -1,0 +1,9 @@
+elpa/*
+!elpa/README
+!sandbox/README
+*.el
+!init.el
+!site-lisp/*.el
+*.*~
+ido.last
+recentf

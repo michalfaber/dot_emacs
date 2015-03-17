@@ -1,0 +1,115 @@
+#+TITLE: Basic appearance
+#+OPTIONS: toc:2 num:nil
+
+** Size of window
+
+  #+begin_src emacs-lisp
+(setq default-frame-alist (append (list
+  '(width  . 160)  ; Width set to 81 characters
+  '(height . 50)) ; Height set to 60 lines
+  default-frame-alist))
+
+  #+end_src
+
+** Menu bar, toolbar in graphical mode
+
+Turn off some bars which only consume space on the screen
+
+  #+begin_src emacs-lisp
+
+(when window-system
+
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1))
+
+  #+end_src
+
+** Suppress startup message
+
+  #+begin_src emacs-lisp
+
+(setq inhibit-startup-message   t)
+
+  #+end_src
+
+** Load theme
+
+  #+begin_src emacs-lisp
+
+(install-if-needed 'color-theme-sanityinc-solarized)
+
+(if window-system
+	(load-theme 'sanityinc-solarized-dark t)
+		(load-theme 'wombat t))
+
+  #+end_src
+
+** Max column indicator
+
+  #+begin_src emacs-lisp
+
+(install-if-needed 'fill-column-indicator)
+(setq-default fill-column 100)
+
+  #+end_src
+
+** Disable line wrapping
+
+  #+begin_src emacs-lisp
+
+(setq-default truncate-lines t)
+
+  #+end_src
+
+** Line numbering
+
+  #+begin_src emacs-lisp
+
+  (global-linum-mode t)
+
+  (unless window-system
+    (add-hook 'linum-before-numbering-hook
+        (lambda ()
+          (setq-local linum-format-fmt
+          (let ((w (length (number-to-string
+                (count-lines (point-min) (point-max))))))
+            (concat "%" (number-to-string w) "d"))))))
+
+  (defun linum-format-func (line)
+    (concat
+     (propertize (format linum-format-fmt line) 'face 'linum)
+     (propertize " " 'face 'mode-line)))
+
+  (unless window-system
+    (setq linum-format 'linum-format-func))
+
+  #+end_src
+
+** Smart modeline
+
+Display a more compact mode line
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'smart-mode-line)
+
+  (setq sml/no-confirm-load-theme t)
+
+  (sml/setup)
+
+  (sml/apply-theme 'dark)
+
+  #+end_src
+   
+
+
+
+
+
+
+
+
+
+

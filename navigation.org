@@ -1,0 +1,73 @@
+#+TITLE: Navigation between panes, buffers
+#+OPTIONS: toc:2 num:nil
+
+** Windmove - switching between windows
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'windmove)
+
+  (global-set-key (kbd "C-c <left>")  'windmove-left)
+  (global-set-key (kbd "C-c <right>") 'windmove-right)
+  (global-set-key (kbd "C-c <up>")    'windmove-up)
+  (global-set-key (kbd "C-c <down>")  'windmove-down)
+
+  #+end_src
+
+** Splitting
+
+It opens the previous buffer instead of two panes with the same buffer
+
+  #+begin_src emacs-lisp
+
+  (defun vsplit-last-buffer (prefix)
+    "Split the window vertically and display the previous buffer."
+    (interactive "p")
+    (split-window-vertically)
+    (other-window 1 nil)
+    (if (= prefix 1)
+      (switch-to-next-buffer)))
+  (defun hsplit-last-buffer (prefix)
+    "Split the window horizontally and display the previous buffer."
+    (interactive "p")
+    (split-window-horizontally)
+    (other-window 1 nil)
+    (if (= prefix 1) (switch-to-next-buffer)))
+  (global-set-key (kbd "C-x 2") 'vsplit-last-buffer)
+  (global-set-key (kbd "C-x 3") 'hsplit-last-buffer)
+
+  #+end_src
+
+** Winner mode - undo and redo window configuration
+
+winner-mode lets you use C-c ; and C-c ' to switch between window configurations. 
+This is handy when something has popped up a buffer that you want to look at briefly before returning to whatever you were working on. 
+When you're done, press C-c ;.
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'winner)
+
+  (setq winner-dont-bind-my-keys t) ;; default bindings conflict with org-mode
+
+  (global-set-key (kbd "C-c ;")  'winner-undo)
+  (global-set-key (kbd "C-c '")  'winner-redo)
+
+  (winner-mode 1)
+
+  #+end_src
+
+** Swap buffers
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'buffer-move)
+
+  (global-set-key (kbd "<C-s-up>")     'buf-move-up)
+  (global-set-key (kbd "<C-s-down>")   'buf-move-down)
+  (global-set-key (kbd "<C-s-left>")   'buf-move-left)
+  (global-set-key (kbd "<C-s-right>")  'buf-move-right)
+
+  #+end_src
+
+

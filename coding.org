@@ -1,0 +1,40 @@
+#+TITLE: Coding
+#+OPTIONS: toc:2 num:nil
+
+** Ido mode
+
+   #+BEGIN_SRC emacs-lisp
+
+(ido-mode t)
+  (setq ido-enable-prefix nil
+        ido-enable-flex-matching t
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point t
+        ido-file-extensions-order '(".scala" ".org" ".txt" ".py" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf")
+        ido-max-prospects 10)
+
+   #+END_SRC
+   
+** Autocompletion
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'company)
+
+  (add-hook 'prog-mode-hook 'company-mode)
+
+  ;;(global-set-key (kbd "<tab>") 'company-complete)
+
+  #+end_src
+
+** Git
+
+  #+begin_src emacs-lisp
+
+
+  (install-if-needed 'magit)
+
+  (setq magit-last-seen-setup-instructions "1.4.0")
+
+  #+end_src
+

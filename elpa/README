@@ -1,0 +1,2 @@
+This folder contains packages installed automatically from repositories (elpa,melpa,etc)
+Please don't modify this folder manually. There is a separate folder site-lisp for manually installed packages.
