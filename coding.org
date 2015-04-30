@@ -1,6 +1,19 @@
 #+TITLE: Coding
 #+OPTIONS: toc:2 num:nil
 
+** Highlight matching parentheses when the point is on them.
+
+May slow things down a little
+
+   #+BEGIN_SRC emacs-lisp
+
+(require 'rainbow-delimiters)
+
+(show-paren-mode 1)
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+   #+END_SRC
 ** Ido mode
 
    #+BEGIN_SRC emacs-lisp
@@ -23,7 +36,7 @@
 
   (add-hook 'prog-mode-hook 'company-mode)
 
-  ;;(global-set-key (kbd "<tab>") 'company-complete)
+;;  (global-set-key (kbd "<tab>") 'company-complete)
 
   #+end_src
 
@@ -35,6 +48,36 @@
   (install-if-needed 'magit)
 
   (setq magit-last-seen-setup-instructions "1.4.0")
+
+  #+end_src
+
+** Lisp / Clojure
+
+Packages that help development in Lisp and Clojure 
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'paredit)
+
+  (install-if-needed 'clojure-mode)
+
+  (install-if-needed 'clojure-mode-extra-font-locking)
+
+  (install-if-needed 'cider)
+
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+
+  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+
+  (setq nrepl-log-messages t)
+
+  (setq cider-interactive-eval-result-prefix "")
+
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+
+  (add-hook 'cider-mode-hook #'company-mode)
 
   #+end_src
 

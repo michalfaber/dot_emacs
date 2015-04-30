@@ -16,7 +16,7 @@
 (setq next-line-add-newlines t)
 
   #+end_src
-
+   
 ** Turn off the backup files
 
 I don’t like them scatter everywhere.
@@ -75,20 +75,6 @@ Nobody likes to have to type out the full yes or no when Emacs asks. Which it do
 
    #+END_SRC
 
-** Highlight matching parentheses when the point is on them.
-
-May slow things down a little
-
-   #+BEGIN_SRC emacs-lisp
-
-(require 'rainbow-delimiters)
-
-(show-paren-mode 1)
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-   #+END_SRC
-
 ** Save a list of recent files visited.
 
    #+BEGIN_SRC emacs-lisp
@@ -104,8 +90,7 @@ May slow things down a little
 (auto-compression-mode t)
 
    #+END_SRC
-
-
+ 
 ** Exec path from shell
 
    #+BEGIN_SRC emacs-lisp
