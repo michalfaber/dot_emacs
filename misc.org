@@ -1,0 +1,11 @@
+#+TITLE: Misc utilities
+#+OPTIONS: toc:2 num:nil
+
+** Dired - browse folder tree
+
+  #+begin_src emacs-lisp
+
+  (install-if-needed 'dired+)
+
+  #+end_src
+

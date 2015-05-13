@@ -1,6 +1,31 @@
 #+TITLE: Coding
 #+OPTIONS: toc:2 num:nil
 
+** Interactive change all occurences of a string.
+
+   #+BEGIN_SRC emacs-lisp
+
+(install-if-needed 'iedit)
+
+(defun iedit-dwim (arg)
+  "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+  (interactive "P")
+  (if arg
+      (iedit-mode)
+    (save-excursion
+      (save-restriction
+        (widen)
+        ;; this function determines the scope of `iedit-start'.
+        (if iedit-mode
+            (iedit-done)
+          ;; `current-word' can of course be replaced by other
+          ;; functions.
+          (narrow-to-defun)
+          (iedit-start (current-word) (point-min) (point-max)))))))
+
+(global-set-key (kbd "C-;") 'iedit-dwim)
+
+   #+END_SRC
 ** Highlight matching parentheses when the point is on them.
 
 May slow things down a little
@@ -81,3 +106,31 @@ Packages that help development in Lisp and Clojure
 
   #+end_src
 
+** Scala
+
+   #+begin_src emacs-lisp
+
+  (install-if-needed 'ensime)
+
+  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+  
+   #+end_src
+   
+** Python
+
+   #+begin_src emacs-lisp
+
+  (install-if-needed 'elpy)
+
+  (elpy-enable)
+
+  (exec-path-from-shell-copy-env "WORKON_HOME")
+  
+  ;; Fixing a key binding bug in elpy
+  (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
+
+  (setq elpy-rpc-backend "rope")
+
+   #+end_src
+
+   

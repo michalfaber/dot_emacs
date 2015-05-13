@@ -86,6 +86,8 @@ Load path, location of some default files.
 ;; new emacs24 cl lib
 (require 'cl-lib)
 
+(require 'package)
+
   #+end_src
 
 
@@ -115,13 +117,16 @@ This function may be used to preempt the installation of ELPA versions of packag
           ("org"         . "http://orgmode.org/elpa/")
           ("melpa"       . "http://melpa.org/packages/")
           ("melpa-stable" . "http://stable.melpa.org/packages/")
-          ("marmalade"   . "http://marmalade-repo.org/packages/")))
+          ("marmalade"   . "https://marmalade-repo.org/packages/")
+          ("elpy"        . "http://jorgenschaefer.github.io/packages/")
+          ))
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 
 (setq package-pinned-packages
                 '((cider              . "melpa-stable")
                   (clojure-mode       . "melpa-stable")
+                  (elpy               . "elpy")
                   ))
 
 (package-initialize)
@@ -163,8 +168,8 @@ Loads other configurations (files with extensions .el, *.org)
   add (load-config \"lisp\") to your configuration.
 
   To load only the 'window-system' config from
-  starter-kit-misc-recommended.org add
-  (load-config \"misc-recommended\" \"window-system\")
+  utils.org add
+  (load-config \”utils\” \"window-system\")
   to your configuration."
 
   (let ((file (expand-file-name (if (string-match ".+\.org" file)
@@ -247,6 +252,15 @@ Work around a bug on OS X where system-name is FQDN.
 (load-config "coding")
 
   #+end_src
+
+** [[https://github.com/michalfaber/dot_emacs/blob/master/misc.org][Loading misc utilities]]
+
+  #+begin_src emacs-lisp
+
+(load-config "misc")
+
+  #+end_src
+
 
 ** Sandbox folder
 

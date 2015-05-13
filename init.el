@@ -11,3 +11,4 @@
     ;; load up my configuration
     (org-babel-load-file (expand-file-name "mfaber.org" emacs-root-dir))
     ))
+(put 'narrow-to-region 'disabled nil)
